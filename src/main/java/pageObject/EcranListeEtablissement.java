@@ -14,7 +14,9 @@ import io.appium.java_client.windows.WindowsDriver;
 
 public class EcranListeEtablissement {
 
-	
+	public void focusTableau(WindowsDriver<RemoteWebElement> driver) {
+		
+	}
 	
 	public List<String> verifSolutionEtabilssement (WindowsDriver<RemoteWebElement> driver, WebDriverWait wait) {
 		int i= 0;
