@@ -17,6 +17,7 @@ import org.junit.Test;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.interactions.internal.Coordinates;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.remote.RemoteWebElement;
@@ -50,7 +51,7 @@ String nom_Propal="Propal_TestAuto";
 		DesiredCapabilities appCapabilities = new DesiredCapabilities();
 		appCapabilities.setCapability("app", "Root");
 		desktopSession = new WindowsDriver<RemoteWebElement>(new URL(REMOTE_URL), appCapabilities);
-		desktopSession.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
+		desktopSession.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 		Assert.assertNotNull(desktopSession);
 		desktopSession.getKeyboard().sendKeys(Keys.META + "s" + Keys.META);
 		String tata = desktopSession.getWindowHandle();
@@ -78,9 +79,11 @@ String nom_Propal="Propal_TestAuto";
 		
 
 		WindowsDriver<RemoteWebElement> soLocalSession = SESSION_HELPER.getSession(solocalWindow);
+		soLocalSession.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 		WebDriverWait wait1 = new WebDriverWait(soLocalSession, 10);
-		
+		//Thread.sleep(4000);
 		EcranConnection ecranConnection = new EcranConnection();
+		//ecranConnection.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 		AcceuilPage acceuil =ecranConnection.seconnecter(soLocalSession, login, password);
 		Thread.sleep(3000);
 		DashboardEPJ dashboard =acceuil.selectionEPJ(soLocalSession, EPJ);
@@ -108,6 +111,11 @@ String nom_Propal="Propal_TestAuto";
 //		Assert.assertEquals(listeRef, tutu);
 //	
 //	
+		Actions actions1 = new Actions(soLocalSession);
+		actions1.moveByOffset(-500,-300 ).build().perform();
+		Thread.sleep(5000);
+		List<String>bob = ecranListeEtablissement.tutu(soLocalSession);
+		//soLocalSession.getMouse().mouseMove(Coordinates, xOffset, yOffset);
 		ecranListeEtablissement.selectionnerConfigurer(soLocalSession, wait1);
 		
 		

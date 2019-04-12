@@ -33,9 +33,27 @@ public class EcranListeEtablissement {
 		return listvaleur;
 		
 	}
-	
+	public List<String> tutu(WindowsDriver<RemoteWebElement> driver){
+		
+
+	int i= 0;
+
+	List<RemoteWebElement> tableau = driver.findElementsByXPath("//*[@Name]");
+			//driver.findElementsByXPath("//Table/Custom/DataItem/Custom/Text[@Name]");
+	List<String> listvaleur = new ArrayList<String>();
+	//List<String> v2 = tableau.stream().map(RemoteWebElement::getAttribute("Name")).collect(Collector.toList());
+	for (RemoteWebElement azerty1 : tableau) {
+		listvaleur.add(azerty1.getAttribute("Name")) ;
+		System.out.println(i);
+		i++;
+	}
+	for (String azertyuiop : listvaleur) {
+		System.out.println(azertyuiop);
+	}
+	return listvaleur;
+	}
 	public void selectionnerConfigurer(WindowsDriver<RemoteWebElement> driver, WebDriverWait wait) {
-		WebElement toto = driver.findElementByName("Configurer");
+		WebElement toto = wait.until(ExpectedConditions.elementToBeClickable(driver.findElementByXPath("//Button[@Name='Configurer']")));
 		toto.click();
 	}
 
